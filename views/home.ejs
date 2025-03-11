@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm Management System</title>
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Farm Management System</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <% if (user) { %>
+            <li><a href="#" id="profile-link">Profile</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
+          <% } else { %>
+            <li><a href="/auth/register">Register</a></li>
+            <li><a href="/auth/login">Login</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+
+    <section class="intro">
+      <div class="container">
+        <h2>Manage Your Farm Efficiently</h2>
+      </div>
+    </section>
+
+    <!-- ourservices page -->
+  <section id="two">
+    <h1 id="ourservices">Our Services</h1>
+    <div class="service-card1">
+      <div class="top-image">
+        <img src="/assets/map.svg" alt="map logo" srcset="" />
+      </div>
+      <h2>Farm Listing Management</h2>
+      <p>Recycled waste products in affordable price!!!</p>
+      <button class="know-more open-button" id="know-more" type="submit">
+        <a href="/farms">Click Here</a>
+      </button>
+      <h5 class="confirm" id="checkauth">
+        Please sign-in to use our services
+      </h5>
+    </div>
+    <div class="service-card">
+      <div class="top-image">
+        <img src="/assets/local_shipping.svg" alt="" />
+      </div>
+      <h2>Lease Management</h2>
+      <p>Want to schedule pickup with us?</p>
+      <button class="know-more" id="know-more1" formtarget="_blank" type="submit">
+        <a href="/"> Click Here</a>
+      </button>
+   </section>
+
+    <section class="features">
+      <div class="container">
+        <h2>Features</h2>
+        <ul>
+          <li>Track farm activities</li>
+          <li>Manage resources</li>
+          <li>Generate reports</li>
+          <li>And much more...</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Farm Management System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Profile Popup -->
+  <div id="profile-popup" class="popup">
+    <div class="popup-content">
+      <span class="close">&times;</span>
+      <h2>User Profile</h2>
+      <div id="profile-info">
+        <p><strong>Name:</strong> <%= user ? user.name : '' %></p>
+        <p><strong>Email:</strong> <%= user ? user.email : '' %></p>
+        <p><strong>Phone Number:</strong> <%= user ? user.phone : '' %></p>
+        <button id="edit-profile-btn">Edit Profile</button>
+      </div>
+      <form id="profile-form" action="/auth/update-profile" method="POST" style="display: none;">
+        <input type="text" name="name" placeholder="Name" value="<%= user ? user.name : '' %>" required>
+        <input type="email" name="email" placeholder="Email" value="<%= user ? user.email : '' %>" required>
+        <input type="text" name="phone" placeholder="Phone Number" value="<%= user ? user.phone : '' %>" required>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Get the modal
+    var modal = document.getElementById("profile-popup");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("profile-link");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Get the edit profile button and form
+    var editBtn = document.getElementById("edit-profile-btn");
+    var profileInfo = document.getElementById("profile-info");
+    var profileForm = document.getElementById("profile-form");
+
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // When the user clicks the edit profile button, show the form
+    editBtn.onclick = function() {
+      profileInfo.style.display = "none";
+      profileForm.style.display = "block";
+    }
+  </script>
+</body>
+</html>

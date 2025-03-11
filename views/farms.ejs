@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm Listings</title>
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Farm Listings</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/farms/create">Create Farm Listing</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <% if (farms.length > 0) { %>
+        <ul>
+          <% farms.forEach(farm => { %>
+            <li>
+              <h2><%= farm.location %></h2>
+              <p>Size: <%= farm.size %> acres</p>
+              <p>Soil Type: <%= farm.soilType %></p>
+              <p>Amenities: <%= farm.amenities.join(', ') %></p>
+              <a href="/farms/edit/<%= farm._id %>">Edit</a>
+            </li>
+          <% }) %>
+        </ul>
+      <% } else { %>
+        <p>No farms listed yet.</p>
+      <% } %>
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Farm Management System. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

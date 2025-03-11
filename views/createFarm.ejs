@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Farm Listing</title>
+  <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+  <div class="register-container">
+    <h2>Create Farm Listing</h2>
+    <form action="/farms/create" method="POST">
+      <input type="text" name="location" placeholder="Location" required>
+      <input type="number" name="size" placeholder="Size (in acres)" required>
+      <input type="text" name="soilType" placeholder="Soil Type" required>
+      <input type="text" name="amenities" placeholder="Amenities (comma separated)" required>
+      <button type="submit">Create</button>
+    </form>
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+  </div>
+</body>
+</html>
